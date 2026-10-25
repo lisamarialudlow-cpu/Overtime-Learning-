@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123D30">
+<meta name="description" content="Overtime Learning helps parents find sample part-time courses that fit around the school run.">
+<title>Overtime Learning | Your Future. Your Timetable.</title>
+<style>
+:root{
+ --bg:#123D30;
+ --panel:#205740;
+ --panel2:#28694C;
+ --gold:#EFC65A;
+ --goldlight:#FFE7A0;
+ --white:#FFFFFF;
+ --muted:#DBEDE1;
+ --border:#558E6D;
+ --ink:#153E2E;
+ --red:#FFD5C9;
+ --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--bg);color:white;
+ font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+ line-height:1.5;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible,
+a:focus-visible{
+ outline:3px solid var(--gold);
+ outline-offset:3px;
+}
+button:disabled{opacity:.45;cursor:not-allowed}
+h1,h2,h3{line-height:1.2}
+h1{font-size:clamp(30px,7vw,42px);letter-spacing:-1.3px}
+h2{font-size:clamp(25px,6vw,32px);letter-spacing:-.7px}
+p{margin-top:8px}
+.app{
+ max-width:700px;margin:auto;
+ min-height:100dvh;padding:20px 17px 45px;
+}
+.brand{text-align:center;padding:12px 0 22px}
+.brand-icon{
+ display:grid;place-items:center;
+ margin:0 auto 10px;width:62px;height:62px;
+ border-radius:19px;background:var(--gold);
+ color:var(--ink);font-size:30px;font-weight:900;
+}
+.brand h1{margin:0}
+.brand p{color:var(--muted);margin:5px 0}
+.screen{animation:fade .18s ease}
+@keyframes fade{
+ from{opacity:.4;transform:translateY(6px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+.welcome{text-align:center;margin:12px 0 24px}
+.welcome h2{margin:0 0 8px}
+.tile{
+ display:flex;align-items:center;gap:14px;
+ width:100%;min-height:102px;padding:18px;
+ text-align:left;color:white;
+ background:var(--panel);
+ border:2px solid var(--border);
+ border-radius:19px;margin:12px 0;
+}
+.tile:active,.btn:active{transform:scale(.985)}
+.tile .icon{
+ display:grid;place-items:center;
+ width:50px;height:50px;flex-shrink:0;
+ background:rgba(255,255,255,.12);
+ border-radius:14px;font-size:25px;
+}
+.tile strong{display:block;font-size:18px}
+.tile small{display:block;color:var(--muted);margin-top:4px}
+.tile .arrow{margin-left:auto;font-size:24px}
+.tile.gold{
+ background:var(--gold);border-color:var(--gold);color:var(--ink);
+}
+.tile.gold small{color:#355342}
+.tile.gold .icon{background:rgba(18,61,48,.1)}
+.panel{
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:var(--radius);
+ padding:20px;margin:18px 0;
+}
+.label{display:block;font-weight:750;margin:20px 0 10px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.day,.subject{
+ min-height:54px;
+ background:var(--bg);color:white;
+ border:2px solid #82AC92;border-radius:13px;
+ font-weight:750;
+}
+.day.selected,.subject.selected{
+ background:var(--gold);border-color:var(--gold);
+ color:var(--ink);
+}
+.times{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+select{
+ width:100%;min-height:54px;padding:10px;
+ background:white;color:var(--ink);
+ border:2px solid white;border-radius:12px;
+}
+.subjects{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.subject{min-height:115px;padding:12px}
+.subject span{display:block;font-size:28px;margin-bottom:6px}
+.btn{
+ min-height:54px;padding:13px 18px;
+ border:0;border-radius:14px;font-weight:800;
+}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-green{
+ background:var(--panel);color:white;
+ border:1px solid var(--border);
+}
+.btn-white{background:white;color:var(--ink)}
+.full{width:100%}
+.actions{display:flex;gap:10px;margin-top:20px}
+.actions .btn{flex:1}
+.step{
+ display:inline-block;background:var(--gold);
+ color:var(--ink);font-size:12px;font-weight:850;
+ padding:6px 12px;border-radius:30px;
+}
+.notice{
+ background:#285D45;border:1px solid var(--border);
+ padding:14px;border-radius:13px;
+ color:#EDF7EF;font-size:13px;margin:17px 0;
+}
+.error{color:var(--red);font-weight:750}
+.course{
+ background:#FFFFFF;color:var(--ink);
+ border-radius:18px;padding:18px;
+ margin:13px 0;border:2px solid #D2E2D6;
+}
+.course h3{margin:9px 0 7px;font-size:20px}
+.course p{color:#4A5D50;font-size:14px;margin:5px 0}
+.badge{
+ display:inline-block;padding:5px 10px;
+ font-size:12px;font-weight:800;
+ border-radius:30px;background:#DDF4E3;color:#17613B;
+}
+.badge.bad{background:#FFE5D7;color:#863719}
+.fav{
+ display:block;width:100%;min-height:46px;
+ border:2px solid var(--ink);
+ background:white;color:var(--ink);
+ border-radius:12px;font-weight:800;margin-top:14px;
+}
+.fav.saved{background:var(--ink);color:white}
+.result-title{margin-top:28px}
+.empty{
+ background:var(--panel);padding:17px;
+ border-radius:15px;margin:12px 0;
+}
+.news{
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:18px;border-radius:17px;margin:13px 0;
+}
+.news h3{margin:8px 0;font-size:18px}
+.news p{color:var(--muted);font-size:14px}
+.price{
+ text-align:center;background:var(--panel);
+ border:2px solid var(--gold);
+ border-radius:22px;padding:26px 20px;
+ margin:18px 0;
+}
+.price-number{
+ font-size:55px;font-weight:900;color:var(--gold);
+ letter-spacing:-2px;
+}
+.price ul{text-align:left;padding-left:25px}
+.price li{margin:12px 0}
+.footer{
+ text-align:center;margin-top:35px;padding-top:20px;
+ border-top:1px solid var(--border);
+ color:var(--muted);font-size:12px;
+}
+.footer button{margin:8px}
+a{color:var(--gold)}
+#live{
+ position:absolute;width:1px;height:1px;overflow:hidden;
+ clip-path:inset(50%);
+}
+@media(max-width:355px){
+ .tile{padding:13px;gap:9px}
+ .tile strong{font-size:16px}
+ .panel{padding:14px}
+ .day{font-size:12px}
+}
+</style>
+</head>
+<body>
+<main class="app">
+
+<header class="brand">
+ <div class="brand-icon" aria-hidden="true">✦</div>
+ <h1>Overtime Learning</h1>
+ <p>Your future. Your timetable.</p>
+</header>
+
+<!-- MAIN MENU -->
+<section id="home" class="screen">
+ <div class="welcome">
+  <h2>Learning that fits your life.</h2>
+  <p class="muted">
+   Find courses that work around school runs
+   and family commitments.
+  </p>
+ </div>
+
+ <button class="tile" onclick="showScreen('availability')">
+  <span class="icon" aria-hidden="true">📅</span>
+  <span>
+   <strong>1. Choose your free time</strong>
+   <small>Select your available days and hours</small>
+  </span>
+  <span class="arrow" aria-hidden="true">›</span>
+ </button>
+
+ <button class="tile" onclick="showScreen('interests')">
+  <span class="icon" aria-hidden="true">📚</span>
+  <span>
+   <strong>2. Pick your interests</strong>
+   <small>Tell us what you'd love to study</small>
+  </span>
+  <span class="arrow" aria-hidden="true">›</span>
+ </button>
+
+ <button class="tile gold" onclick="findCourses()">
+  <span class="icon" aria-hidden="true">🔎</span>
+  <span>
+   <strong>3. Find your fit</strong>
+   <small>See courses that suit your timetable</small>
+  </span>
+  <span class="arrow" aria-hidden="true">›</span>
+ </button>
+
+ <button class="tile" onclick="openNews()">
+  <span class="icon" aria-hidden="true">🔔</span>
+  <span>
+   <strong>Upcoming Course News</strong>
+   <small>Discover new sample learning opportunities</small>
+  </span>
+  <span class="arrow" aria-hidden="true">›</span>
+ </button>
+
+ <button class="tile" onclick="showScreen('membership')">
+  <span class="icon" aria-hidden="true">★</span>
+  <span>
+   <strong>Overtime Learning Plus</strong>
+   <small>Proposed membership — €5 per month</small>
+  </span>
+  <span class="arrow" aria-hidden="true">›</span>
+ </button>
+
+ <div class="notice">
+  Demonstration only. All course information is fictional.
+  No real payments, enrolments or notifications take place.
+ </div>
+</section>
+
+<!-- STEP ONE -->
+<section id="availability" class="screen hidden">
+ <span class="step">STEP 1 OF 3</span>
+ <h2>When are you free?</h2>
+ <p class="muted">
+  Choose the days and times that work around
+  your school collection responsibilities.
+ </p>
+
+ <div class="panel">
+  <label class="label">Days you're available</label>
+  <div id="days" class="days"></div>
+
+  <div class="times">
+   <div>
+    <label class="label" for="start">Available from</label>
+    <select id="start"></select>
+   </div>
+   <div>
+    <label class="label" for="end">Must leave by</label>
+    <select id="end"></select>
+   </div>
+  </div>
+
+  <label class="label" for="buffer">Extra travel allowance</label>
+  <select id="buffer">
+   <option value="0">No extra time</option>
+   <option value="15">15 minutes</option>
+   <option value="30">30 minutes</option>
+   <option value="45">45 minutes</option>
+   <option value="60">60 minutes</option>
+  </select>
+  <p class="small">
+   We subtract this allowance from your leaving time
+   when matching course finishing times.
+  </p>
+  <p id="timeError" class="error hidden" role="alert"></p>
+ </div>
+
+ <div class="actions">
+  <button class="btn btn-green" onclick="showScreen('home')">← Home</button>
+  <button class="btn btn-gold" onclick="continueFromTime()">Continue →</button>
+ </div>
+</section>
+
+<!-- STEP TWO -->
+<section id="interests" class="screen hidden">
+ <span class="step">STEP 2 OF 3</span>
+ <h2>What would you love to learn?</h2>
+ <p class="muted">
+  Choose your interests, or leave all unselected
+  to include every subject.
+ </p>
+ <div class="panel">
+  <div class="subjects" id="subjects"></div>
+ </div>
+ <div class="actions">
+  <button class="btn btn-green" onclick="showScreen('availability')">← Back</button>
+  <button class="btn btn-gold" onclick="findCourses()">Find My Fit →</button>
+ </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultsScreen" class="screen hidden">
+ <span class="step">YOUR RESULTS</span>
+ <h2>Courses that fit your life.</h2>
+ <p class="muted">Matches based on your actual selections.</p>
+ <div class="notice">
+  All courses and providers displayed here are
+  fictional sample data for demonstration purposes.
+ </div>
+ <div id="results"></div>
+ <button class="btn btn-gold full"
+  onclick="showScreen('home')" style="margin-top:18px">
+  ← Change My Choices
+ </button>
+ <button class="btn btn-green full"
+  onclick="resetAll()" style="margin-top:10px">
+  Reset Preferences
+ </button>
+</section>
+
+<!-- NEWS -->
+<section id="newsScreen" class="screen hidden">
+ <span class="step">COURSE NEWS</span>
+ <h2>Upcoming learning opportunities.</h2>
+ <p class="muted">
+  Sample announcements checked against your saved
+  days, hours and interests.
+ </p>
+ <div class="notice">
+  These announcements are fictional and stored inside
+  the demo. Real news updates and notifications
+  would require a future live data service.
+ </div>
+ <div id="newsList"></div>
+ <button class="btn btn-gold full"
+  onclick="showScreen('home')" style="margin-top:15px">
+  ← Back to Home
+ </button>
+</section>
+
+<!-- SUBSCRIPTION -->
+<section id="membership" class="screen hidden">
+ <span class="step">PROPOSED MEMBERSHIP</span>
+ <h2>Overtime Learning Plus</h2>
+ <p class="muted">
+  A simple way to stay informed about learning
+  opportunities that fit your life.
+ </p>
+
+ <div class="price">
+  <div class="small">PROPOSED MONTHLY SUBSCRIPTION</div>
+  <div class="price-number">€5</div>
+  <div>per month</div>
+  <ul>
+   <li>Personalised course matching</li>
+   <li>News of upcoming courses</li>
+   <li>Alerts for courses that suit your school hours</li>
+   <li>Saved favourites and timetable preferences</li>
+   <li>New intake and enrolment information</li>
+  </ul>
+  <button class="btn btn-gold full"
+   onclick="joinDemo()">
+   Join for €5/month
+  </button>
+  <p class="small">
+   Demonstration only. No payment or subscription
+   will be created.
+  </p>
+  <p id="joinMessage" role="status"></p>
+ </div>
+
+ <button class="btn btn-green full"
+  onclick="showScreen('home')">← Back to Home</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="screen hidden">
+ <h2>About Overtime Learning</h2>
+ <p>
+  Overtime Learning is a fictional course-matching
+  service for parents in Navan, County Meath, who
+  want to return to education around school hours.
+ </p>
+ <h3>The problem</h3>
+ <p>
+  Parents may need to check individual timetables
+  before finding courses that suit their family
+  responsibilities.
+ </p>
+ <h3>Our solution</h3>
+ <p>
+  Select your free days, set your hours, choose
+  interests and receive automatically calculated
+  course matches with explanations for conflicts.
+ </p>
+ <h3>Six customer requirements</h3>
+ <ol>
+  <li>Select available weekdays.</li>
+  <li>Set available hours and travel allowance.</li>
+  <li>Filter by subject interest.</li>
+  <li>Automatically identify matching courses.</li>
+  <li>Explain timetable conflicts.</li>
+  <li>Save favourites and preferences after refresh.</li>
+ </ol>
+ <h3>Existing alternatives</h3>
+ <p>
+  <a target="_blank" rel="noopener noreferrer"
+   href="https://www.fetchcourses.ie/course/finder">
+   FETCH Courses
+  </a>
+  and
+  <a target="_blank" rel="noopener noreferrer"
+   href="https://www.lmetb.ie/further-education-training/find-a-course/">
+   LMETB's course finder
+  </a>
+  provide existing course-search information.
+  Overtime Learning explores a more personalised
+  school-hours matching experience.
+ </p>
+ <p class="small">Alternatives reviewed: 25 October 2026.</p>
+ <h3>How the service could be funded</h3>
+ <p>
+  The proposed €5 monthly subscription could support
+  future course updates, hosting and maintenance.
+  Revenue depends on actual paying subscribers.
+  The price and business model are assumptions.
+ </p>
+ <h3>Prototype status</h3>
+ <p>
+  Course matching, preferences, favourites and sample
+  news matching are demonstrated locally in the browser.
+  Payments, live listings and real notifications
+  are planned only.
+ </p>
+ <button class="btn btn-gold full"
+  onclick="showScreen('home')">← Home</button>
+</section>
+
+<footer class="footer">
+ <strong>Overtime Learning</strong>
+ <p>Fictional student prototype · Not affiliated with LMETB or FETCH.</p>
+ <p>No personal information or payment details are transmitted.</p>
+ <button class="btn btn-green" onclick="showScreen('about')">
+  About the Project
+ </button>
+</footer>
+<div id="live" role="status" aria-live="polite"></div>
+</main>
+
+<script>
+"use strict";
+
+/* All information in these records is invented. */
+const COURSES=[
+ {id:1,title:"Introduction to Computers",subject:"Computers",
+ day:"Wed",start:"10:00",end:"12:00",provider:"Navan Learning Centre (Sample)"},
+ {id:2,title:"Office Administration",subject:"Business",
+ day:"Mon",start:"09:30",end:"13:30",provider:"Boyne Skills Academy (Sample)"},
+ {id:3,title:"Introduction to Healthcare",subject:"Healthcare",
+ day:"Wed",start:"13:00",end:"16:00",provider:"Navan Learning Centre (Sample)"},
+ {id:4,title:"Childcare Fundamentals",subject:"Childcare",
+ day:"Tue",start:"10:00",end:"12:30",provider:"Meath Community Learning (Sample)"},
+ {id:5,title:"Digital Skills",subject:"Computers",
+ day:"Fri",start:"09:30",end:"12:30",provider:"Boyne Skills Academy (Sample)"},
+ {id:6,title:"Business Essentials",subject:"Business",
+ day:"Thu",start:"11:00",end:"14:00",provider:"Navan Learning Centre (Sample)"},
+ {id:7,title:"Healthcare Communication",subject:"Healthcare",
+ day:"Mon",start:"10:00",end:"14:00",provider:"Meath Community Learning (Sample)"},
+ {id:8,title:"Early Childhood Learning",subject:"Childcare",
+ day:"Fri",start:"12:00",end:"15:00",provider:"Boyne Skills Academy (Sample)"}
+];
+
+/* Fictional upcoming-course announcements.
+   Different intake dates are sample values, not real openings. */
+const NEWS=[
+ {id:101,title:"Digital Confidence — New Intake",
+ subject:"Computers",day:"Wed",start:"10:00",end:"12:00",
+ intake:"9 November 2026",provider:"Navan Learning Centre (Sample)"},
+ {id:102,title:"Practical Business Skills — New Intake",
+ subject:"Business",day:"Mon",start:"10:00",end:"13:00",
+ intake:"16 November 2026",provider:"Boyne Skills Academy (Sample)"},
+ {id:103,title:"Healthcare Foundations — New Intake",
+ subject:"Healthcare",day:"Tue",start:"09:30",end:"12:00",
+ intake:"23 November 2026",provider:"Meath Community Learning (Sample)"},
+ {id:104,title:"Child Development — New Intake",
+ subject:"Childcare",day:"Fri",start:"12:30",end:"15:30",
+ intake:"30 November 2026",provider:"Navan Learning Centre (Sample)"}
+];
+const DAYS=["Mon","Tue","Wed","Thu","Fri"];
+const SUBJECTS=[
+ ["Computers","💻"],["Business","💼"],
+ ["Healthcare","❤️"],["Childcare","📚"]
+];
+const STORAGE="overtime-learning-plus-v1";
+
+function defaults(){
+ return {
+  days:["Mon","Wed","Fri"],
+  subjects:[],
+  start:"09:30",end:"14:30",buffer:15,
+  favourites:[],availabilitySet:false
+ };
+}
+function validTime(value){
+ return typeof value==="string"&&
+ /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+function load(){
+ try{
+  const v=JSON.parse(localStorage.getItem(STORAGE));
+  if(!v||typeof v!=="object")return defaults();
+  return {
+   days:Array.isArray(v.days)?
+    v.days.filter(d=>DAYS.includes(d)):defaults().days,
+   subjects:Array.isArray(v.subjects)?
+    v.subjects.filter(s=>SUBJECTS.some(x=>x[0]===s)):[],
+   start:validTime(v.start)?v.start:"09:30",
+   end:validTime(v.end)?v.end:"14:30",
+   buffer:[0,15,30,45,60].includes(Number(v.buffer))?
+    Number(v.buffer):15,
+   favourites:Array.isArray(v.favourites)?
+    v.favourites.filter(id=>COURSES.some(c=>c.id===id)):[],
+   availabilitySet:v.availabilitySet===true
+  };
+ }catch{return defaults()}
+}
+let state=load();
+
+function save(){
+ try{localStorage.setItem(STORAGE,JSON.stringify(state))}
+ catch{announce("Your browser could not save preferences.")}
+}
+function announce(text){
+ document.getElementById("live").textContent=text;
+}
+function mins(t){
+ const [h,m]=t.split(":").map(Number);
+ return h*60+m;
+}
+function displayTime(m){
+ const h=Math.floor(m/60);
+ return `${h%12||12}:${String(m%60).padStart(2,"0")} ${h>=12?"pm":"am"}`;
+}
+function populateTimes(id,selected){
+ const select=document.getElementById(id);
+ select.replaceChildren();
+ for(let m=420;m<=1140;m+=15){
+  const val=`${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+  select.add(new Option(displayTime(m),val));
+ }
+ select.value=selected;
+}
+function showScreen(id){
+ ["home","availability","interests","resultsScreen",
+  "newsScreen","membership","about"].forEach(name=>{
+   document.getElementById(name).classList.toggle("hidden",id!==name);
+  });
+ window.scrollTo(0,0);
+}
+function renderDays(){
+ const root=document.getElementById("days");
+ root.replaceChildren();
+ DAYS.forEach(day=>{
+  const selected=state.days.includes(day);
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="day"+(selected?" selected":"");
+  b.textContent=day;
+  b.setAttribute("aria-pressed",String(selected));
+  b.onclick=()=>{
+   state.days=selected?
+    state.days.filter(d=>d!==day):[...state.days,day];
+   save();renderDays();
+  };
+  root.appendChild(b);
+ });
+}
+function renderSubjects(){
+ const root=document.getElementById("subjects");
+ root.replaceChildren();
+ SUBJECTS.forEach(([name,emoji])=>{
+  const selected=state.subjects.includes(name);
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="subject"+(selected?" selected":"");
+  b.setAttribute("aria-pressed",String(selected));
+  const ico=document.createElement("span");
+  ico.textContent=emoji;
+  ico.setAttribute("aria-hidden","true");
+  b.append(ico,document.createTextNode(name));
+  b.onclick=()=>{
+   state.subjects=selected?
+    state.subjects.filter(s=>s!==name):
+    [...state.subjects,name];
+   save();renderSubjects();
+  };
+  root.appendChild(b);
+ });
+}
+function syncTimes(){
+ state.start=document.getElementById("start").value;
+ state.end=document.getElementById("end").value;
+ state.buffer=Number(document.getElementById("buffer").value);
+ save();
+}
+function validateTime(){
+ syncTimes();
+ const e=document.getElementById("timeError");
+ e.classList.add("hidden");
+ e.textContent="";
+ let error="";
+ if(!state.days.length)error="Select at least one weekday.";
+ else if(mins(state.start)>=mins(state.end))
+  error="Your leaving time must be later than your start time.";
+ else if(mins(state.start)>=mins(state.end)-state.buffer)
+  error="Your travel allowance leaves no time for a course.";
+ if(error){
+  e.textContent=error;e.classList.remove("hidden");return false;
+ }
+ state.availabilitySet=true;save();return true;
+}
+function continueFromTime(){
+ if(validateTime())showScreen("interests");
+}
+function evaluate(course){
+ const problems=[];
+ if(!state.days.includes(course.day))
+  problems.push("Not on an available weekday.");
+ if(mins(course.start)<mins(state.start))
+  problems.push(`Starts at ${displayTime(mins(course.start))}, before you're available.`);
+ const latest=mins(state.end)-state.buffer;
+ if(mins(course.end)>latest)
+  problems.push(`Finishes at ${displayTime(mins(course.end))}, after your latest suitable finish of ${displayTime(latest)}.`);
+ if(state.subjects.length&&!state.subjects.includes(course.subject))
+  problems.push("Not one of your selected interests.");
+ return {course,match:problems.length===0,problems};
+}
+function findCourses(){
+ if(!state.availabilitySet){
+  showScreen("availability");
+  announce("Choose your availability first.");
+  return;
+ }
+ if(!validateTime()){
+  showScreen("availability");return;
+ }
+ renderResults();
+ showScreen("resultsScreen");
+}
+function makeCard(result){
+ const {course,match,problems}=result;
+ const card=document.createElement("article");
+ card.className="course";
+ const badge=document.createElement("span");
+ badge.className="badge"+(match?"":" bad");
+ badge.textContent=match?"✓ Suitable course":"Timetable conflict";
+ const title=document.createElement("h3");
+ title.textContent=course.title;
+ const meta=document.createElement("p");
+ meta.textContent=`${course.subject} · ${course.day} · ${displayTime(mins(course.start))}–${displayTime(mins(course.end))}`;
+ const provider=document.createElement("p");
+ provider.textContent=course.provider;
+ card.append(badge,title,meta,provider);
+ if(!match){
+  const list=document.createElement("ul");
+  problems.forEach(reason=>{
+   const li=document.createElement("li");
+   li.textContent=reason;
+   list.appendChild(li);
+  });
+  card.appendChild(list);
+ }
+ const saved=state.favourites.includes(course.id);
+ const btn=document.createElement("button");
+ btn.className="fav"+(saved?" saved":"");
+ btn.textContent=saved?"★ Saved to Favourites":"☆ Save Course";
+ btn.setAttribute("aria-pressed",String(saved));
+ btn.onclick=()=>{
+  state.favourites=saved?
+   state.favourites.filter(id=>id!==course.id):
+   [...state.favourites,course.id];
+  save();renderResults();
+ };
+ card.appendChild(btn);
+ return card;
+}
+function sectionHeading(text){
+ const h=document.createElement("h3");
+ h.className="result-title";
+ h.textContent=text;
+ return h;
+}
+function renderResults(){
+ const root=document.getElementById("results");
+ root.replaceChildren();
+ const all=COURSES.map(evaluate);
+ const matches=all.filter(x=>x.match);
+ const other=all.filter(x=>!x.match);
+ const summary=document.createElement("div");
+ summary.className="notice";
+ summary.textContent=`${matches.length} of ${COURSES.length} courses match your selected timetable and interests.`;
+ root.appendChild(summary);
+ root.appendChild(sectionHeading(`Your Matches (${matches.length})`));
+ if(!matches.length){
+  const empty=document.createElement("div");
+  empty.className="empty";
+  empty.textContent="No courses match all your choices. Try changing your days, hours or subjects.";
+  root.appendChild(empty);
+ }
+ matches.forEach(r=>root.appendChild(makeCard(r)));
+ const saved=COURSES.filter(c=>state.favourites.includes(c.id));
+ root.appendChild(sectionHeading(`Your Favourites (${saved.length})`));
+ if(!saved.length){
+  const p=document.createElement("p");
+  p.className="small";p.textContent="Save a course to build your shortlist.";
+  root.appendChild(p);
+ }else{
+  saved.forEach(c=>{
+   const p=document.createElement("p");
+   p.textContent=`★ ${c.title} — ${c.day}`;
+   root.appendChild(p);
+  });
+ }
+ root.appendChild(sectionHeading(`Other Courses (${other.length})`));
+ const help=document.createElement("p");
+ help.className="small";
+ help.textContent="These courses are unsuitable for one or more reasons, explained below.";
+ root.appendChild(help);
+ other.forEach(r=>root.appendChild(makeCard(r)));
+ announce(`${matches.length} suitable sample courses found.`);
+}
+function openNews(){
+ renderNews();
+ showScreen("newsScreen");
+}
+function renderNews(){
+ const root=document.getElementById("newsList");
+ root.replaceChildren();
+ const heading=document.createElement("h3");
+ heading.textContent="New sample announcements";
+ root.appendChild(heading);
+ NEWS.forEach(item=>{
+  const result=state.availabilitySet?evaluate(item):null;
+  const card=document.createElement("article");
+  card.className="news";
+  const badge=document.createElement("span");
+  badge.className="badge"+(result&&!result.match?" bad":"");
+  badge.textContent=!result?"Set your availability to check":
+   result.match?"✓ Fits your saved choices":"Does not match your choices";
+  const title=document.createElement("h3");
+  title.textContent=item.title;
+  const details=document.createElement("p");
+  details.textContent=`${item.day} · ${displayTime(mins(item.start))}–${displayTime(mins(item.end))} · ${item.subject}`;
+  const date=document.createElement("p");
+  date.textContent=`Sample intake: ${item.intake}`;
+  const provider=document.createElement("p");
+  provider.textContent=item.provider;
+  card.append(badge,title,details,date,provider);
+  if(result&&!result.match){
+   const ul=document.createElement("ul");
+   result.problems.forEach(p=>{
+    const li=document.createElement("li");
+    li.textContent=p;ul.appendChild(li);
+   });
+   card.appendChild(ul);
+  }
+  root.appendChild(card);
+ });
+}
+function joinDemo(){
+ document.getElementById("joinMessage").textContent=
+  "Thank you for your interest! This is a demonstration. No payment or subscription has been created.";
+}
+function resetAll(){
+ if(!confirm("Clear your timetable, interests and favourites?"))return;
+ state=defaults();save();initialise();
+ showScreen("home");
+ announce("Preferences have been reset.");
+}
+function initialise(){
+ populateTimes("start",state.start);
+ populateTimes("end",state.end);
+ document.getElementById("buffer").value=String(state.buffer);
+ renderDays();renderSubjects();
+}
+["start","end","buffer"].forEach(id=>{
+ document.getElementById(id).addEventListener("change",syncTimes);
+});
+initialise();
+showScreen("home");
+</script>
+</body>
+</html>

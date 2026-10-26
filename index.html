@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#195A40">
+<meta name="description" content="Overtime Learning helps parents find education courses that fit around school hours and family commitments.">
+<title>Overtime Learning | Education That Fits Your Life</title>
+
+<style>
+:root {
+  --forest: #195A40;
+  --green: #287350;
+  --bright: #368861;
+  --gold: #EFC65A;
+  --cream: #F7F8F1;
+  --white: #FFFFFF;
+  --ink: #173C2C;
+  --muted: #52665A;
+  --line: #D9E6DA;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+a { color: #155D41; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #E6B336;
+  outline-offset: 4px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: auto;
+  padding: 0 22px;
+}
+
+/* HEADER */
+
+header {
+  background: var(--forest);
+  color: white;
+  border-bottom: 1px solid #477D59;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 75px;
+}
+
+.brand {
+  color: white;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 850;
+  text-decoration: none;
+  letter-spacing: -.6px;
+}
+
+.nav-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* HERO */
+
+.hero {
+  background: linear-gradient(145deg, #195A40, #287350);
+  color: white;
+  padding: 85px 0 95px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-block;
+  border: 1px solid #A6C8AA;
+  background: rgba(255,255,255,.09);
+  color: #F0F8EF;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+h1 {
+  font-size: clamp(39px, 7vw, 70px);
+  line-height: 1.09;
+  letter-spacing: -2px;
+  margin: 23px 0;
+}
+
+h1 span { color: var(--gold); }
+
+h2 {
+  font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+h3 { font-size: 20px; margin: 12px 0; }
+
+.hero p {
+  font-size: clamp(17px, 2vw, 21px);
+  max-width: 640px;
+  margin: 0 auto 30px;
+  color: #E3F2E8;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 56px;
+  padding: 15px 28px;
+  border-radius: 15px;
+  font-weight: 850;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn-white {
+  background: white;
+  color: var(--ink);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.micro {
+  font-size: 13px !important;
+  margin-top: 19px !important;
+  color: #D7EADB !important;
+}
+
+/* BACKGROUND DECORATIONS */
+
+.hero-symbol {
+  position: absolute;
+  font-size: clamp(65px, 10vw, 125px);
+  opacity: .14;
+  filter: grayscale(1) brightness(3);
+  pointer-events: none;
+}
+
+.symbol-one {
+  left: 2%;
+  top: 8%;
+  transform: rotate(-20deg);
+}
+
+.symbol-two {
+  right: 3%;
+  top: 14%;
+  transform: rotate(18deg);
+}
+
+.symbol-three {
+  left: 7%;
+  bottom: 4%;
+  transform: rotate(14deg);
+}
+
+.symbol-four {
+  right: 6%;
+  bottom: 3%;
+  transform: rotate(-12deg);
+}
+
+/* GENERAL SECTIONS */
+
+section.content { padding: 75px 0; }
+
+.section-intro {
+  max-width: 750px;
+  margin-bottom: 32px;
+}
+
+.subtle { color: var(--muted); }
+
+.tag {
+  display: inline-block;
+  background: #D8EEDD;
+  color: #175C3B;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 7px 13px;
+  border-radius: 30px;
+  margin-bottom: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 8px 27px rgba(19,60,40,.06);
+}
+
+.card p { color: var(--muted); }
+
+.number {
+  display: grid;
+  place-items: center;
+  background: var(--gold);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.tinted { background: #E8F0E7; }
+
+.dark {
+  background: var(--forest);
+  color: white;
+}
+
+.dark p { color: #E1EFE4; }
+
+.dark .card {
+  background: var(--green);
+  color: white;
+  border-color: #71A482;
+}
+
+.dark .card p { color: #E1EFE4; }
+
+/* PROBLEM */
+
+.quote {
+  background: white;
+  border-left: 6px solid var(--gold);
+  padding: 25px;
+  border-radius: 8px 18px 18px 8px;
+  font-size: 19px;
+  font-weight: 650;
+  margin: 30px 0;
+}
+
+/* REQUIREMENTS */
+
+.requirements {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.requirement {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 20px;
+}
+
+.check {
+  color: var(--green);
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.requirement strong { display: block; }
+
+.requirement p {
+  margin: 5px 0 0;
+  color: var(--muted);
+}
+
+/* EXISTING ALTERNATIVES */
+
+.links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 19px;
+}
+
+.links a { font-weight: 750; }
+
+/* SUBSCRIPTION */
+
+.price-card {
+  max-width: 550px;
+  margin: auto;
+  text-align: center;
+  background: var(--green);
+  border: 2px solid var(--gold);
+  border-radius: 26px;
+  padding: 36px 24px;
+}
+
+.price {
+  font-size: 68px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.1;
+}
+
+.price-card ul {
+  text-align: left;
+  max-width: 395px;
+  margin: 25px auto;
+  padding-left: 25px;
+}
+
+.price-card li { margin: 12px 0; }
+
+.notice {
+  font-size: 13px;
+  color: #E6F3E9;
+}
+
+/* USER TESTING */
+
+.testing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* FOOTER */
+
+footer {
+  background: #103D2A;
+  color: #E1EFE4;
+  padding: 37px 22px;
+  text-align: center;
+  font-size: 13px;
+}
+
+footer p { margin: 7px 0; }
+footer a { color: var(--gold); }
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+  .hero { padding: 65px 0; }
+
+  .grid,
+  .requirements,
+  .links,
+  .testing {
+    grid-template-columns: 1fr;
+  }
+
+  section.content { padding: 48px 0; }
+
+  .card { padding: 22px; }
+
+  .hero-symbol {
+    font-size: 72px;
+    opacity: .09;
+  }
+}
+
+@media (max-width: 380px) {
+  nav { gap: 7px; }
+
+  .nav-btn {
+    font-size: 13px;
+    padding: 11px;
+  }
+
+  .hero-buttons .btn { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="container" aria-label="Main navigation">
+    <a class="brand" href="#top">✦ Overtime Learning</a>
+    <a class="nav-btn" href="demo.html">Try the App →</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-symbol symbol-one" aria-hidden="true">📚</div>
+  <div class="hero-symbol symbol-two" aria-hidden="true">🎓</div>
+  <div class="hero-symbol symbol-three" aria-hidden="true">✏️</div>
+  <div class="hero-symbol symbol-four" aria-hidden="true">💻</div>
+
+  <div class="container hero-content">
+    <span class="eyebrow">
+      Designed for parents returning to education in Navan
+    </span>
+
+    <h1>
+      Your education.<br>
+      <span>Your timetable.</span>
+    </h1>
+
+    <p>
+      Find learning opportunities that fit around school
+      drop-off, collection times and family life.
+    </p>
+
+    <div class="hero-buttons">
+      <a class="btn btn-gold" href="demo.html">
+        Find My Courses →
+      </a>
+
+      <a class="btn btn-white" href="#how-it-works">
+        How It Works
+      </a>
+    </div>
+
+    <p class="micro">
+      Interactive demonstration · No account required ·
+      Fictional sample courses
+    </p>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="content" id="problem">
+  <div class="container">
+
+    <div class="section-intro">
+      <span class="tag">THE PROBLEM</span>
+
+      <h2>
+        Going back to education shouldn't mean
+        missing the school run.
+      </h2>
+
+      <p class="subtle">
+        For parents in Navan returning to part-time education,
+        finding a suitable course can involve checking individual
+        timetables and comparing them with family commitments.
+      </p>
+    </div>
+
+    <div class="quote">
+      "I'd love to go back to education, but I need to collect
+      my children from school. How do I find a course that fits?"
+
+      <p class="subtle" style="font-size:13px;font-weight:400">
+        Invented example quote illustrating the proposed
+        customer's problem.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="number">1</div>
+        <h3>Limited availability</h3>
+        <p>
+          Parents may only be available during
+          particular weekdays and school hours.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="number">2</div>
+        <h3>Timetable conflicts</h3>
+        <p>
+          Courses may begin too early or finish
+          too late for school collection.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="number">3</div>
+        <h3>Time-consuming searches</h3>
+        <p>
+          Comparing course timetables can take
+          valuable time away from busy parents.
+        </p>
+      </article>
+
+    </div>
+
+    <p class="subtle" style="margin-top:24px">
+      <strong>Our customer:</strong> Parents living in Navan,
+      County Meath, who want to return to part-time education
+      but need to work around school collection. Parents use
+      the service, choose their own courses and would be
+      the proposed paying subscribers.
+    </p>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="content dark" id="how-it-works">
+  <div class="container">
+
+    <div class="section-intro">
+      <span class="tag">THE SOLUTION</span>
+      <h2>Three simple steps to finding your fit.</h2>
+
+      <p>
+        Overtime Learning is a mobile-first educational
+        course-matching tool designed around busy parents.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="number">1</div>
+        <h3>Choose your free time</h3>
+        <p>
+          Select the days you're available, choose
+          your hours and allow time for school collection.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="number">2</div>
+        <h3>Pick your interests</h3>
+        <p>
+          Choose Computers, Business, Healthcare,
+          Childcare or explore all subjects.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="number">3</div>
+        <h3>Find your fit</h3>
+        <p>
+          See matching courses, understand timetable
+          conflicts and save your favourites.
+        </p>
+      </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:35px">
+      <a class="btn btn-gold" href="demo.html">
+        Try the Working Demo →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SIX REQUIREMENTS -->
+<section class="content" id="requirements">
+  <div class="container">
+
+    <div class="section-intro">
+      <span class="tag">SIX CUSTOMER REQUIREMENTS</span>
+
+      <h2>Designed around real family commitments.</h2>
+
+      <p class="subtle">
+        Every requirement below is implemented in
+        the working demonstration.
+      </p>
+    </div>
+
+    <div class="requirements">
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R1 — Choose available days</strong>
+          <p>
+            Large weekday buttons allow parents to
+            select the days they are free.
+          </p>
+        </div>
+      </div>
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R2 — Set available hours</strong>
+          <p>
+            Select available start and leaving times,
+            including an optional travel allowance.
+          </p>
+        </div>
+      </div>
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R3 — Choose course interests</strong>
+          <p>
+            Filter courses by Computers, Business,
+            Healthcare and Childcare.
+          </p>
+        </div>
+      </div>
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R4 — Automatic course matching</strong>
+          <p>
+            The app compares saved availability and
+            interests with fictional course timetables.
+          </p>
+        </div>
+      </div>
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R5 — Understand conflicts</strong>
+          <p>
+            Unsuitable courses are displayed separately,
+            explaining why they do not fit.
+          </p>
+        </div>
+      </div>
+
+      <div class="requirement">
+        <span class="check">✓</span>
+        <div>
+          <strong>R6 — Save favourites</strong>
+          <p>
+            Save favourite courses and preferences,
+            which remain after refreshing the browser.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- EXISTING ALTERNATIVES -->
+<section class="content tinted" id="alternatives">
+  <div class="container">
+
+    <div class="section-intro">
+      <span class="tag">EXISTING ALTERNATIVES</span>
+
+      <h2>How do parents find courses today?</h2>
+
+      <p class="subtle">
+        Existing education websites help people explore
+        available learning opportunities. Overtime Learning
+        aims to complement these services by focusing
+        specifically on school-hour availability.
+      </p>
+    </div>
+
+    <div class="links">
+
+      <article class="card">
+        <h3>FETCH Courses</h3>
+
+        <p>
+          FETCH is an Irish further education and training
+          course-finding service, offering search options
+          such as course type, location and provider.
+        </p>
+
+        <p>
+          <strong>Our proposed difference:</strong>
+          Automatically matching courses against a parent's
+          selected weekdays, hours and school-run requirements.
+        </p>
+
+        <a href="https://www.fetchcourses.ie/course/finder"
+           target="_blank"
+           rel="noopener noreferrer">
+          Visit FETCH Courses →
+        </a>
+
+        <p class="subtle" style="font-size:12px">
+          Alternative reviewed: 26 October 2026
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>LMETB Course Finder</h3>
+
+        <p>
+          Louth and Meath Education and Training Board
+          provides information about further education
+          and training opportunities in the region.
+        </p>
+
+        <p>
+          <strong>Our proposed difference:</strong>
+          A simple, phone-first matching system designed
+          around parents' exact available hours.
+        </p>
+
+        <a href="https://www.lmetb.ie/further-education-training/find-a-course/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Visit LMETB →
+        </a>
+
+        <p class="subtle" style="font-size:12px">
+          Alternative reviewed: 26 October 2026
+        </p>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section class="content dark" id="membership">
+  <div class="container">
+
+    <div class="section-intro"
+         style="text-align:center;margin:0 auto 35px">
+
+      <span class="tag">PROPOSED BUSINESS MODEL</span>
+
+      <h2>Learning opportunities, on your terms.</h2>
+
+      <p>
+        Overtime Learning proposes a low-cost
+        subscription to help fund the service.
+      </p>
+    </div>
+
+    <div class="price-card">
+
+      <h3>Overtime Learning Plus</h3>
+
+      <div class="price">€5</div>
+
+      <strong>per month</strong>
+
+      <ul>
+        <li>Personalised course matching — demonstrated</li>
+        <li>Saved course favourites — demonstrated</li>
+        <li>Fictional upcoming-course news — demonstrated</li>
+        <li>Live course updates — planned</li>
+        <li>Automatic course notifications — planned</li>
+      </ul>
+
+      <a class="btn btn-gold" href="demo.html">
+        Explore Overtime Learning →
+      </a>
+
+      <p class="notice">
+        Proposed subscription only. No payments are collected.
+        The €5 price is an assumed future business model.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- USER TESTING -->
+<section class="content" id="testing">
+  <div class="container">
+
+    <div class="section-intro">
+
+      <span class="tag">INDEPENDENT USER TESTING</span>
+
+      <h2>Tested, reviewed and improved.</h2>
+
+      <p class="subtle">
+        The prototype was tested independently,
+        and feedback was provided by email on
+        26 October 2026.
+      </p>
+
+    </div>
+
+    <div class="testing">
+
+      <article class="card">
+        <h3>What the tester found</h3>
+
+        <p>
+          The tester explored the webpage and reported
+          that the main functions appeared to work.
+        </p>
+
+        <p>
+          However, they felt that the original dark-green
+          background was too dark.
+        </p>
+
+        <p>
+          They also found it difficult to access saved
+          courses that did not match their timetable.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>What we changed</h3>
+
+        <p>
+          The background was updated to a brighter
+          emerald-green colour scheme.
+        </p>
+
+        <p>
+          A dedicated My Saved Courses screen and
+          heart-shaped favourites button were introduced.
+        </p>
+
+        <p>
+          Parents can now revisit courses they have saved,
+          including those that do not match their timetable.
+        </p>
+      </article>
+
+    </div>
+
+    <p class="subtle" style="font-size:13px;margin-top:20px">
+      Testing summary based on actual feedback.
+      No tester contact information is published.
+    </p>
+
+  </div>
+</section>
+
+<!-- FINAL CALL TO ACTION -->
+<section class="content dark">
+  <div class="container" style="text-align:center">
+
+    <h2>Your next chapter could start here.</h2>
+
+    <p>
+      Choose your available hours, explore your
+      interests and discover which sample courses
+      fit around your family life.
+    </p>
+
+    <a class="btn btn-gold" href="demo.html">
+      Try Overtime Learning →
+    </a>
+
+    <p class="notice" style="margin-top:25px">
+      This fictional student prototype uses eight
+      invented course records and is not a live
+      enrolment service.
+    </p>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Overtime Learning</strong>
+
+  <p>Education that fits around family life.</p>
+
+  <p>
+    Fictional educational technology project.
+    Not affiliated with or endorsed by LMETB or FETCH.
+  </p>
+
+  <p>
+    No real customer records, payments or
+    registrations are collected.
+  </p>
+
+  <p>
+    <a href="demo.html">Open the working demonstration</a>
+  </p>
+</footer>
+
+</body>
+</html>
